@@ -33,3 +33,18 @@ type MyReadonly<T> = { readonly [P in keyof T]: T[P] }
 
 // can't write like [P in [K extends keyof T]: T[P]]
 ```
+
+### Tuple to Object
+```ts
+type TupleToObject<T extends readonly (string | number | symbol)[]> = {
+  [P in T[number]]: P;
+};
+
+// points
+
+// 1. how to write union type array
+// (string | number | symbol)[]
+
+// 2. how to write index signature
+// [P in T[number]]: P;
+```
