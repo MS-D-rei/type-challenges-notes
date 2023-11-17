@@ -35,6 +35,7 @@ type MyReadonly<T> = { readonly [P in keyof T]: T[P] }
 ```
 
 ### Tuple to Object
+URL: https://github.com/type-challenges/type-challenges/blob/main/questions/00011-easy-tuple-to-object/README.md
 ```ts
 type TupleToObject<T extends readonly (string | number | symbol)[]> = {
   [P in T[number]]: P;
