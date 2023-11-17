@@ -22,3 +22,4 @@ type cases = [
 
 /* _____________ Answer _____________ */
 
+// type MyExclude<T, U> = T extends U ? never : T;
