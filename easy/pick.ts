@@ -14,7 +14,7 @@ const todo: TodoPreview = {
   completed: false,
 };
 
-type MyPick<T, K> = any;
+// type MyPick<T, K> = any;
 
 // must pass the tests below
 
@@ -41,9 +41,9 @@ interface Expected2 {
 }
 
 // Answer
-// type MyPick<T, K extends keyof T> = {
-//   [P in K]: T[P];
-// };
+type MyPick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
 
 // Explanation
 
