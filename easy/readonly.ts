@@ -3,7 +3,7 @@
 // typescript handbook
 // https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#readonly-and-const
 
-import { Equal, Expect } from "../index";
+import { Equal, Expect } from "../utils";
 
 interface Todo {
   title: string;
@@ -20,7 +20,7 @@ todo.description = "barFoo"; // Error: cannot reassign a readonly property
 
 // make own readonly
 
-type MyReadonly<T> = any;
+// type MyReadonly<T> = any;
 
 // must pass
 type cases = [Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>];
@@ -36,7 +36,7 @@ interface Todo1 {
 
 // Answer
 
-// type MyReadonly<T> = { readonly [P in keyof T ]: T[P]}
+type MyReadonly<T> = { readonly [P in keyof T]: T[P] };
 
 // Point
 
