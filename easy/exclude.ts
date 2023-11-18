@@ -9,7 +9,6 @@
 /* _____________ Your Code Here _____________ */
 
 // type MyExclude<T, U> = any
-type MyExclude<T, U> = T extends U ? never : T
 
 /* _____________ Test Cases _____________ */
 import { Equal, Expect } from "../utils";
@@ -22,4 +21,4 @@ type cases = [
 
 /* _____________ Answer _____________ */
 
-// type MyExclude<T, U> = T extends U ? never : T;
+type MyExclude<T, U> = T extends U ? never : T;

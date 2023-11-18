@@ -14,9 +14,6 @@
 
 // type Length<T> = any
 
-type Length<T> = T extends { length: infer L } ? L : never
-// type Length<T extends readonly any[]> = T['length']
-
 /* _____________ Test Cases _____________ */
 import { Equal, Expect } from '../utils'
 
@@ -34,6 +31,6 @@ type cases = [
 
 /* _____________ Answer _____________ */
 
-// type Length<T extends any[]> = T['length']
+type Length<T extends readonly any[]> = T['length']
 
 // type Length<T extends any[]> = T extends { length: infer L } ? L : never
