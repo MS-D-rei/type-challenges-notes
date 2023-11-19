@@ -1,51 +1,57 @@
-import { Equal, Expect } from "../utils";
+// Implement the built-in `Pick<T, K>` generic without using it.
 
-interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
-}
+// For example
 
-type TodoPreview = Pick<Todo, "title" | "completed">;
-// type TodoPreview = Pick<Todo, "title" | "completed">;
+// interface Todo {
+//  title: string;
+//  description: string;
+//  completed: boolean;
+// }
 
-const todo: TodoPreview = {
-  title: "Clean room",
-  completed: false,
-};
+// type TodoPreview = MyPick<Todo, "title" | "completed">;
+
+// const todo: TodoPreview = {
+// title: "Clean room",
+// completed: false,
+// };
+
+/* _____________ Your Code Here _____________ */
 
 // type MyPick<T, K> = any;
 
-// must pass the tests below
+/* _____________ Test Cases _____________ */
+
+import { Equal, Expect } from "../utils";
 
 type cases = [
-  Expect<Equal<Expected1, MyPick<Todo, "title">>>,
-  Expect<Equal<Expected2, MyPick<Todo, "title" | "completed">>>,
+  Expect<Equal<Expected1, MyPick<Todo, 'title'>>>,
+  Expect<Equal<Expected2, MyPick<Todo, 'title' | 'completed'>>>,
   // @ts-expect-error
-  MyPick<Todo, "title" | "completed" | "invalid">,
-];
+  MyPick<Todo, 'title' | 'completed' | 'invalid'>,
+]
 
 interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
+  title: string
+  description: string
+  completed: boolean
 }
 
 interface Expected1 {
-  title: string;
+  title: string
 }
 
 interface Expected2 {
-  title: string;
-  completed: boolean;
+  title: string
+  completed: boolean
 }
 
-// Answer
+/* _____________ Answer _____________ */
+
 type MyPick<T, K extends keyof T> = {
   [P in K]: T[P];
 };
 
-// Explanation
+/* _____________ Points _____________ */
 
 interface UserInfo {
   name: string;
