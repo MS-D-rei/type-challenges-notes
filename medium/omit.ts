@@ -48,9 +48,13 @@ interface Expected2 {
 // https://github.com/type-challenges/type-challenges/issues/4
 // https://github.com/type-challenges/type-challenges/issues/448
 
+type MyOmit<T, K extends keyof T> = {
+  [P in keyof T as P extends K ? never : P]: T[P]
+}
+
 type MyExclude<T, U> = T extends U ? never : T
 
-type MyOmit<T, K extends keyof T> = {
+type MyOmit2<T, K extends keyof T> = {
   [P in MyExclude<keyof T, K>]: T[P]
 }
 
