@@ -3,11 +3,13 @@
 // For example
 
 // const foo = (arg1: string, arg2: number): void => {}
+// type footype = typeof foo // (arg1: string, arg2: number) => void
+// type fooParameters = Parameters<footype> // [string, number]
 // type FunctionParamsType = MyParameters<typeof foo> // [string, number]
 
 /* _____________ Your Code Here _____________ */
 
-// type MyParameters<T extends (...args: any[]) => any> = any[];
+// type MyParameters<T extends (...args: any[]) => any> = any[]; 
 
 /* _____________ Test Cases _____________ */
 
