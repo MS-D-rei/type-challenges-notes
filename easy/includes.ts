@@ -10,6 +10,12 @@
 /* _____________ Your Code Here _____________ */
 
 // type Includes<T extends readonly any[], U> = any;
+// type Includes<T extends readonly any[], U> = U extends T[number] ? true : false;
+
+// const array1 = ["Kars", "Esidisi", "Wamuu", "Santana"];
+// type bool1 = Includes<typeof array1, "Kars">; // expected to be `true`
+// const blankObjArray = [{}];
+// type bool2 = Includes<typeof blankObjArray, { a: "A" }>; // expected to be `false`
 
 /* _____________ Test Cases _____________ */
 
@@ -51,8 +57,14 @@ type IsEqual<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
   ? true
   : false;
 
-type Includes<Value extends any[], Item> = IsEqual<Value[0], Item> extends true
+type Includes2<Value extends any[], Item> = IsEqual<Value[0], Item> extends true
   ? true
   : Value extends [Value[0], ...infer rest]
-  ? Includes<rest, Item>
+  ? Includes2<rest, Item>
+  : false;
+
+type Includes<T extends readonly any[], U> = T extends [infer L, ...infer R]
+ ? [U, L] extends [L, U]
+    ? true
+    : Includes<R, U>
   : false;
