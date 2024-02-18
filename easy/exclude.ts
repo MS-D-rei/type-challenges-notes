@@ -21,4 +21,6 @@ type cases = [
 
 /* _____________ Answer _____________ */
 
+// Distributive conditional types
+// => if T is a union type, then T extends U ? X : Y is resolved for each constituent type of T
 type MyExclude<T, U> = T extends U ? never : T;
