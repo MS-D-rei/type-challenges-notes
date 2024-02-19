@@ -59,16 +59,14 @@ interface Expected {
 
 /* _____________ Answer _____________ */
 
-type MyExclude<T, U> = T extends U ? never : T
+type MyOmit<T, K extends keyof T> = {
+  [P in keyof T as P extends K ? never : P]: T[P]
+}
 
-type MyReadonly2<T, K extends keyof T> = { readonly [P in keyof T as P extends K ? P : never]: T[P] } & { [U in MyExclude<keyof T, K>]: T[U] }
-
-// type MyReadonly2<T, K extends keyof T> = Omit<T, K> & Readonly<Pick<T, K>>
-
-type todo1 = MyReadonly2<Todo1, 'title' | 'description'>
+type MyReadonly2<T, K extends keyof T = keyof T> = { readonly [P in K]: T[P]} & MyOmit<T, K>
+// type Todo1Type = MyReadonly2<Todo1, 'title' | 'description'>
 
 /* _____________ Points _____________ */
 
-// How to use '&' to combine two types
-// How to use 'as' to filter properties
-// => P in keyof T as P extends K ? P : never
+// 1. `&` is used to combine two types.
+// 2. default type (= keyof T) is used to make all properties readonly when K is not provided.
