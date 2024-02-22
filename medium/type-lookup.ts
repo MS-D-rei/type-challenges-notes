@@ -56,14 +56,23 @@ type cases = [
 
 /* _____________ Your Code Here _____________ */
 
-// simple solution
+// 1. simple solution
 type LookUp<U, T> = U extends { type: T } ? U : never;
 // type LookUp<U extends { type: string }, T extends U["type"]> = U extends { type: T } ? U : never;
 
-// This U["type"] doesn't work as distribution type
+// 2. This U["type"] doesn't work as distribution type
 // type LookUp<U extends { type: string }, T extends U["type"]> = U["type"] extends T ? U : never;
+//
 // This works as distribution type
-// type LookUp<U, T> = U extends Cat | Dog ? U["type"] extends T ? U : never : never;
+// type LookUp<U, T> = U extends U ? U["type"] extends T ? U : never : never;
+
+// 3. Intentionally make an object type and access it.
+// type LookUp<U, T extends string> = { [K in T]: U extends { type: T } ? U : never }[T];
+// const dogString = "dog";
+// type DogString = typeof dogString; // "dog"
+// type DogObject = { [K in DogString]: K }; // { dog: "dog" }
+// type DogObjectAccess = DogObject[DogString]; // "dog"
+
 type DogTest = Dog["type"]; // "dog"
 type catTest = Cat["type"]; // "cat"
 type MyDogType = LookUp<Animal, "dog">; // expected to be `Dog`
