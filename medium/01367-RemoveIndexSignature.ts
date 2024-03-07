@@ -93,3 +93,9 @@ type TestStringExtends2 = 'foo' extends string ? true : false // true
 // type RemoveIndexSignature<T> = {
 //   [P in keyof T as (string | number | symbol) extends P ? never : P]: T[P]
 // }
+
+// Another Solution
+// PropertyKey is a union type of string, number, and symbol.
+// type RemoveIndexSignature<T, PK = PropertyKey> = {
+//   [P in keyof T as PK extends P ? never : P extends PK ? P : never]: T[P]
+// }
